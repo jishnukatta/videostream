@@ -1,0 +1,97 @@
+version: '3.8'
+
+services:
+
+  eureka-server:
+    build:
+      context: ./eurekaserver
+    image: videostream/eureka-server:latest   # specify the image name
+    ports:
+      - "8761:8761"
+    networks:
+      - videostream
+    container_name: eureka-server
+
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - videostream
+    container_name: zipkin
+
+  api-gateway:
+    build:
+      context: ./apigateway
+    image: videostream/api-gateway:latest     # specify the image name
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+    networks:
+      - videostream
+    container_name: api-gateway
+
+  authentication-service:
+    build:
+      context: ./authentication-service
+    image: videostream/authentication-service:latest  # specify the image name
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka-server
+    networks:
+      - videostream
+    container_name: authentication-service
+
+  user-service:
+    build:
+      context: ./userservice
+    image: videostream/user-service:latest  # specify the image name
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka-server
+    networks:
+      - videostream
+    container_name: user-service
+
+  video-streaming-service:
+    build:
+      context: ./video-streaming-service
+    image: videostream/video-streaming-service:latest  # specify the image name
+    ports:
+      - "8085:8085"
+    depends_on:
+      - eureka-server
+    networks:
+      - videostream
+    container_name: video-streaming-service
+
+  video-upload-service:
+    build:
+      context: ./video-upload-service
+    image: videostream/video-upload-service:latest  # specify the image name
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka-server
+    networks:
+      - videostream
+    container_name: video-upload-service
+
+  transcoding-service:
+    build:
+      context: ./transcoding-service
+    image: videostream/transcoding-service:latest  # specify the image name
+    ports:
+      - "8084:8084"
+    depends_on:
+      - eureka-server
+    networks:
+      - videostream
+    container_name: transcoding-service
+
+networks:
+  videostream:
+    driver: bridge
