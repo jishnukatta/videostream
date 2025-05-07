@@ -56,6 +56,7 @@ Tracks and visualizes the flow of requests across microservices for efficient mo
 Base URL: /auth
 
 Endpoints:
+
 POST /auth/user-signup
 Registers a new user.
 Request Body: SignupRequest (email, password, confirmPassword)
@@ -95,6 +96,7 @@ Response: Success message
 Base URL: /videos
 
 Endpoints:
+
 POST /videos/upload
 Uploads a video and metadata, triggers transcoding asynchronously.
 Request: VideoRequest (metadata) and MultipartFile (video file)
@@ -109,6 +111,7 @@ Response: Video metadata
 Base URL: /api/v1/transcoding
 
 Endpoints:
+
 POST /api/v1/transcoding/start/{videoId}
 Starts transcoding for a video.
 Response: Success message
@@ -118,6 +121,7 @@ Response: Success message
 Base URL: /stream
 
 Endpoints:
+
 GET /stream/video
 Streams video for a user.
 Request Params: userId (user ID), videoId (video ID)
