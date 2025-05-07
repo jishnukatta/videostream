@@ -1,5 +1,8 @@
 **Video Streaming Platform - Microservices Architecture**
+
 **Overview**
+
+
 This document outlines the architecture, services, and interactions within the Video Streaming Platform built using Spring Boot and Microservices. The platform is designed to handle:
 
 User Authentication
