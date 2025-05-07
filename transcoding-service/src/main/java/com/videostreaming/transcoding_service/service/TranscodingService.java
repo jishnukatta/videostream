@@ -46,7 +46,7 @@ public class TranscodingService {
     }
 
 	private void transcodeVideo(String videoPath) throws IOException {
-		String ffmpegPath = "D:\\ffmpeg-7.1.1-essentials_build\\bin\\ffmpeg.exe";
+		String ffmpegPath = System.getenv("FFMPEG_PATH");
 
 		ProcessBuilder builder = new ProcessBuilder(ffmpegPath, "-i", videoPath, "-c:v", "libx264", "-preset", "fast",
 				"-c:a", "aac", "-strict", "-2", videoPath + "_transcoded.mp4");
